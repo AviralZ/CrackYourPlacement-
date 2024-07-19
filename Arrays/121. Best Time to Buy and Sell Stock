@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& a) 
+    {
+        int mine = a[0];
+        int maxp=INT_MIN;
+        for(int i=1;i<a.size();i++)
+        {
+            if(a[i]<mine)
+            {
+                mine = a[i];
+            }
+            else
+            {
+                maxp = max(a[i]-mine,maxp);
+            }
+        }
+        return (maxp==INT_MIN ? 0 : maxp);
+        
+    }
+};
