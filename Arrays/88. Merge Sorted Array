@@ -1,0 +1,44 @@
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) 
+    
+    {
+        int k=0;
+
+        for(int i=m;i<(m+n);i++)
+        {
+            nums1[i] = nums2[k++];
+        }
+
+        int gap =(m+n)/2;
+
+        while(gap>0)
+        {
+            int z1 =0;
+            int z2 = gap;
+
+           while(z2<(m+n))
+            {
+                if(nums1[z1] > nums1[z2])
+                {
+                    swap(nums1[z1],nums1[z2]);
+                    cout<<z1<<" "<<z2<<endl;
+                }
+                ++z2;
+                ++z1;
+            }
+
+
+            if(gap==1)
+            {
+                gap=0;
+            }
+            
+            else {
+                gap = (ceil)((float)gap/2);
+            }
+        }
+
+        
+    }
+};
