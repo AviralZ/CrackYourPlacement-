@@ -1,0 +1,86 @@
+class Solution 
+{
+public:
+    int largestRectangleArea(vector<int>& h) 
+    {
+        vector<int> right = NSR(h);
+        vector<int> left = NSL(h);
+        int maxarea= INT_MIN;
+
+        for(int i=0;i<h.size();i++)
+        {
+            int w = right[i]-left[i]-1;
+            int area = w*h[i];
+            maxarea = max(maxarea,area);
+        }
+
+        return maxarea;
+
+    }
+
+    vector<int> NSR(vector<int> h)
+    {
+        stack<pair<int,int>> st;
+        int n = h.size();
+        vector<int> index(n);
+        for(int i = n - 1; i >= 0; i--){
+            if(st.empty()){
+                st.push({h[i],i});
+                index[i] = n;
+            }
+            else if(st.top().first < h[i]){
+                index[i] = st.top().second;
+                st.push({h[i],i});
+            }
+            else if(st.top().first >= h[i]){
+                while(!st.empty() && st.top().first >= h[i]){
+                    st.pop();
+                }
+                if(st.empty()){
+                    st.push({h[i],i});
+                    index[i] = n;
+                }
+                else if(st.top().first < h[i]){
+                    index[i] = st.top().second;
+                    st.push({h[i],i});
+                }
+            }
+        }
+        return index;
+    }
+
+        vector<int> NSL(vector<int> h)
+        {
+         
+         stack<pair<int,int>> st;
+         int n = h.size();
+        vector<int> index(n);
+        for(int i = 0; i < n; i++){
+            if(st.empty()){
+                st.push({h[i],i});
+                index[i] = -1;
+            }
+            else if(st.top().first < h[i]){
+                index[i] = st.top().second;
+                st.push({h[i],i});
+            }
+            else if(st.top().first >= h[i]){
+                while(!st.empty() && st.top().first >= h[i])
+                {
+                    st.pop();
+                }
+                if(st.empty())
+                {
+                    st.push({h[i],i});
+                    index[i] = -1;
+                }
+                else if(st.top().first < h[i])
+                {
+                    index[i] = st.top().second;
+                    st.push({h[i],i});
+                }
+            }
+        }
+        return index;
+    }
+};
