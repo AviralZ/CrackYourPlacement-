@@ -1,0 +1,25 @@
+class Solution {
+public:
+
+  int nthUglyNumber(int n) {
+
+    priority_queue<long long,vector<long long>,greater<long long>> minh;
+    minh.push(1);
+    
+    int cnt=0,uglynum=1,prev=0;
+    while(cnt<n)
+    {
+
+        while(minh.top()== prev)  //to remove duplicates
+           minh.pop();
+
+          uglynum=minh.top(); minh.pop(); cnt++;
+          prev=uglynum;
+        
+          minh.push(1ll*uglynum*2);
+          minh.push(1ll*uglynum*3);
+          minh.push(1ll*uglynum*5);
+    }
+        return uglynum;
+    }
+};
