@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& s)
+    {
+        unordered_map<string,vector<string>> mp;
+        int n=s.size();
+
+
+        for(int i=0;i<n;i++)
+        {
+            string ss=s[i];
+            string z=ss;
+            sort(ss.begin(),ss.end());
+            mp[ss].push_back(z);
+
+        }
+
+        vector<vector<string>> vv;
+
+        for(auto it:mp)
+        {
+            vv.push_back(it.second);
+        }
+
+        return vv;
+        
+    }
+};
